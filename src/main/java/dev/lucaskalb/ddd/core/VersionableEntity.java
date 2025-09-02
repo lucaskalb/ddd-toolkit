@@ -8,27 +8,33 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 /**
- * Abstract base class for domain entities that support optimistic locking through versioning.
+ * Abstract base class for domain entities that support optimistic locking
+ * through versioning.
  * <p>
- * This class extends {@link IdentityDomain} to add version-based concurrency control using
- * JPA's {@code @Version} annotation. This enables optimistic locking to prevent lost updates
+ * This class extends {@link IdentityDomain} to add version-based concurrency
+ * control using
+ * JPA's {@code @Version} annotation. This enables optimistic locking to prevent
+ * lost updates
  * in concurrent scenarios while maintaining DDD entity semantics.
  * </p>
  * <p>
- * The version field is automatically managed by the JPA provider and should not be modified
- * directly by application code. Each successful update operation increments the version.
+ * The version field is automatically managed by the JPA provider and should not
+ * be modified
+ * directly by application code. Each successful update operation increments the
+ * version.
  * </p>
  * <p>
  * Example usage:
+ * 
  * <pre>{@code
  * @Entity
  * public class Account extends VersionableEntity<AccountId> {
- *     private Money balance;
- *     
- *     public void withdraw(Money amount) {
- *         // domain logic here
- *         // version will be automatically incremented on save
- *     }
+ *   private Money balance;
+ * 
+ *   public void withdraw(Money amount) {
+ *     // domain logic here
+ *     // version will be automatically incremented on save
+ *   }
  * }
  * }</pre>
  * </p>
@@ -40,7 +46,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 @MappedSuperclass
 public abstract class VersionableEntity<T extends EntityId> extends IdentityDomain<T> {
 
-  @Serial 
+  @Serial
   private static final long serialVersionUID = 1L;
 
   /**
@@ -67,8 +73,10 @@ public abstract class VersionableEntity<T extends EntityId> extends IdentityDoma
   /**
    * Determines equality based on both the entity's identifier and version.
    * <p>
-   * Two versionable entities are considered equal if they have the same ID and version.
-   * This ensures that different versions of the same logical entity are treated as
+   * Two versionable entities are considered equal if they have the same ID and
+   * version.
+   * This ensures that different versions of the same logical entity are treated
+   * as
    * different objects for equality purposes.
    * </p>
    * 
@@ -77,9 +85,11 @@ public abstract class VersionableEntity<T extends EntityId> extends IdentityDoma
    */
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
+    if (this == o)
+      return true;
 
-    if (o == null || getClass() != o.getClass()) return false;
+    if (o == null || getClass() != o.getClass())
+      return false;
 
     VersionableEntity<?> that = (VersionableEntity<?>) o;
 

@@ -1,6 +1,5 @@
 package dev.lucaskalb.ddd.core;
 
-import dev.lucaskalb.ddd.Arguments;
 import java.io.Serializable;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.Column;
@@ -10,22 +9,28 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 /**
- * Abstract base class for domain entities that are identified by a strongly-typed ID.
+ * Abstract base class for domain entities that are identified by a
+ * strongly-typed ID.
  * <p>
- * This class implements the Entity pattern from Domain-Driven Design, where entities are
- * distinguished by their identity rather than their attributes. It provides a foundation
- * for all domain entities that need persistent identity and proper equality semantics.
+ * This class implements the Entity pattern from Domain-Driven Design, where
+ * entities are
+ * distinguished by their identity rather than their attributes. It provides a
+ * foundation
+ * for all domain entities that need persistent identity and proper equality
+ * semantics.
  * </p>
  * <p>
- * The class uses JPA annotations for persistence mapping and ensures that entity equality
+ * The class uses JPA annotations for persistence mapping and ensures that
+ * entity equality
  * is based solely on the entity's ID, following DDD best practices.
  * </p>
  * <p>
  * Example usage:
+ * 
  * <pre>{@code
  * @Entity
  * public class User extends IdentityDomain<UserId> {
- *     // domain logic here
+ *   // domain logic here
  * }
  * }</pre>
  * </p>
@@ -47,7 +52,8 @@ public abstract class IdentityDomain<T extends EntityId> implements Serializable
   /**
    * Sets the unique identifier for this entity.
    * <p>
-   * This method is protected to allow subclasses to set the ID during construction
+   * This method is protected to allow subclasses to set the ID during
+   * construction
    * while preventing external modification of the entity's identity.
    * </p>
    * 
@@ -72,7 +78,8 @@ public abstract class IdentityDomain<T extends EntityId> implements Serializable
    * Determines equality based on the entity's identifier.
    * <p>
    * Two entities are considered equal if they have the same type and the same ID.
-   * This follows DDD principles where entity identity is the sole determinant of equality.
+   * This follows DDD principles where entity identity is the sole determinant of
+   * equality.
    * </p>
    * 
    * @param o the object to compare with
@@ -80,9 +87,11 @@ public abstract class IdentityDomain<T extends EntityId> implements Serializable
    */
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
+    if (this == o)
+      return true;
 
-    if (o == null || getClass() != o.getClass()) return false;
+    if (o == null || getClass() != o.getClass())
+      return false;
 
     IdentityDomain<?> that = (IdentityDomain<?>) o;
 

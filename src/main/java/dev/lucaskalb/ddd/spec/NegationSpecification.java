@@ -1,17 +1,22 @@
 package dev.lucaskalb.ddd.spec;
 
 /**
- * A specification that represents the logical NOT operation of another specification.
+ * A specification that represents the logical NOT operation of another
+ * specification.
  * <p>
- * This specification is satisfied when the wrapped specification is not satisfied by
- * the candidate object. It provides a way to invert the logic of existing business rules.
+ * This specification is satisfied when the wrapped specification is not
+ * satisfied by
+ * the candidate object. It provides a way to invert the logic of existing
+ * business rules.
  * </p>
  * <p>
- * This class is package-private and is typically created through the {@link Specification#not()}
+ * This class is package-private and is typically created through the
+ * {@link Specification#not()}
  * method rather than being instantiated directly.
  * </p>
  * <p>
  * Example:
+ * 
  * <pre>{@code
  * Specification<Product> expiredProduct = product -> product.getExpirationDate().isBefore(LocalDate.now());
  * 
@@ -35,7 +40,8 @@ final class NegationSpecification<T> implements Specification<T> {
    * @throws IllegalArgumentException if specification is null
    */
   NegationSpecification(Specification<T> specification) {
-    if (specification == null) throw new IllegalArgumentException("spec cannot be null");
+    if (specification == null)
+      throw new IllegalArgumentException("spec cannot be null");
     this.specification = specification;
   }
 

@@ -1,30 +1,35 @@
 package dev.lucaskalb.ddd.spec;
 
 /**
- * Interface representing the Specification pattern for encapsulating business rules.
+ * Interface representing the Specification pattern for encapsulating business
+ * rules.
  * <p>
- * The Specification pattern allows business rules to be recombined by chaining business 
- * logic in a boolean fashion. This interface provides the foundation for creating 
+ * The Specification pattern allows business rules to be recombined by chaining
+ * business
+ * logic in a boolean fashion. This interface provides the foundation for
+ * creating
  * composable specifications that can be combined using logical operations.
  * </p>
  * <p>
  * Specifications are useful for:
  * <ul>
- *   <li>Validation of objects against business rules</li>
- *   <li>Selection/filtering of objects from collections</li>
- *   <li>Building complex queries in a readable and maintainable way</li>
+ * <li>Validation of objects against business rules</li>
+ * <li>Selection/filtering of objects from collections</li>
+ * <li>Building complex queries in a readable and maintainable way</li>
  * </ul>
  * </p>
  * <p>
  * Example usage:
+ * 
  * <pre>{@code
  * Specification<Customer> vipCustomer = customer -> customer.getTotalSpent().compareTo(new BigDecimal("10000")) > 0;
- * Specification<Customer> activeCustomer = customer -> customer.getLastOrderDate().isAfter(LocalDate.now().minusMonths(6));
+ * Specification<Customer> activeCustomer = customer -> customer.getLastOrderDate()
+ *     .isAfter(LocalDate.now().minusMonths(6));
  * 
  * Specification<Customer> vipAndActive = vipCustomer.and(activeCustomer);
  * 
  * if (vipAndActive.satisfiedBy(customer)) {
- *     // Apply VIP active customer benefits
+ *   // Apply VIP active customer benefits
  * }
  * }</pre>
  * </p>
@@ -44,9 +49,11 @@ public interface Specification<T> {
   boolean satisfiedBy(T candidate);
 
   /**
-   * Creates a new specification that represents the logical AND of this specification and another.
+   * Creates a new specification that represents the logical AND of this
+   * specification and another.
    * <p>
-   * The resulting specification is satisfied only when both this specification and the other 
+   * The resulting specification is satisfied only when both this specification
+   * and the other
    * specification are satisfied by the same candidate.
    * </p>
    * 
@@ -59,9 +66,11 @@ public interface Specification<T> {
   }
 
   /**
-   * Creates a new specification that represents the logical OR of this specification and another.
+   * Creates a new specification that represents the logical OR of this
+   * specification and another.
    * <p>
-   * The resulting specification is satisfied when either this specification or the other 
+   * The resulting specification is satisfied when either this specification or
+   * the other
    * specification (or both) are satisfied by the candidate.
    * </p>
    * 
@@ -74,9 +83,11 @@ public interface Specification<T> {
   }
 
   /**
-   * Creates a new specification that represents the logical NOT of this specification.
+   * Creates a new specification that represents the logical NOT of this
+   * specification.
    * <p>
-   * The resulting specification is satisfied when this specification is not satisfied 
+   * The resulting specification is satisfied when this specification is not
+   * satisfied
    * by the candidate.
    * </p>
    * 

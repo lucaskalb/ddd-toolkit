@@ -3,7 +3,6 @@ package dev.lucaskalb.ddd.spec;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import dev.lucaskalb.ddd.spec.Specification;
 import org.junit.jupiter.api.Test;
 
 class NegationSpecificationTest {
@@ -11,10 +10,9 @@ class NegationSpecificationTest {
   @Test
   void conjunctionSpecification() {
     var doesLikeToEatFruitSpecification = new DoesLikeToEatFruitSpecification();
-    var isSatisfied =
-        doesLikeToEatFruitSpecification
-            .and(new BananaSpecification())
-            .satisfiedBy("I like to eat banana");
+    var isSatisfied = doesLikeToEatFruitSpecification
+        .and(new BananaSpecification())
+        .satisfiedBy("I like to eat banana");
 
     assertTrue(isSatisfied);
   }
@@ -22,11 +20,10 @@ class NegationSpecificationTest {
   @Test
   void negationSpecification() {
     var doesLikeToEatFruitSpecification = new DoesLikeToEatFruitSpecification();
-    var isSatisfied =
-        doesLikeToEatFruitSpecification
-            .and(new BananaSpecification())
-            .and(new SandSpecification().not())
-            .satisfiedBy("I like to eat sand");
+    var isSatisfied = doesLikeToEatFruitSpecification
+        .and(new BananaSpecification())
+        .and(new SandSpecification().not())
+        .satisfiedBy("I like to eat sand");
 
     assertFalse(isSatisfied);
   }
@@ -34,11 +31,10 @@ class NegationSpecificationTest {
   @Test
   void disjunctionSpecification() {
     var doesLikeToEatFruitSpecification = new DoesLikeToEatFruitSpecification();
-    var isSatisfied =
-        doesLikeToEatFruitSpecification
-            .and(new BananaSpecification().or(new PineappleSpecification()))
-            .and(new SandSpecification().not())
-            .satisfiedBy("I like to eat pineapple");
+    var isSatisfied = doesLikeToEatFruitSpecification
+        .and(new BananaSpecification().or(new PineappleSpecification()))
+        .and(new SandSpecification().not())
+        .satisfiedBy("I like to eat pineapple");
 
     assertTrue(isSatisfied);
   }
