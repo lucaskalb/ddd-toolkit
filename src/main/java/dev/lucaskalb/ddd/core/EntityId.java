@@ -6,28 +6,70 @@ import java.util.UUID;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.MappedSuperclass;
 
+/**
+ * Abstract base class for entity identifiers using UUID as the underlying value type.
+ * <p>
+ * This class provides a foundation for creating strongly-typed entity identifiers that follow
+ * Domain-Driven Design principles. It uses UUID for globally unique identification and includes
+ * JPA annotations for persistence support.
+ * </p>
+ * <p>
+ * Subclasses should provide specific identity types for different entities:
+ * <pre>{@code
+ * public class UserId extends EntityId {
+ *     public UserId() { super(); }
+ *     public UserId(UUID id) { super(id); }
+ * }
+ * }</pre>
+ * </p>
+ * 
+ * @author Lucas Kalb
+ * @since 0.0.1
+ */
 @Embeddable
 @MappedSuperclass
 public abstract class EntityId implements Identity<UUID> {
 
-  @Serial private static final long serialVersionUID = 1L;
+  @Serial 
+  private static final long serialVersionUID = 1L;
 
+  /**
+   * The UUID value that uniquely identifies the entity.
+   */
   protected UUID value;
 
+  /**
+   * Protected default constructor for JPA and subclass use.
+   */
   protected EntityId() {
     super();
   }
 
+  /**
+   * Protected constructor that initializes the entity ID with the given UUID.
+   * 
+   * @param id the UUID value for this entity ID, must not be null
+   * @throws IllegalArgumentException if the id is null
+   */
   protected EntityId(UUID id) {
     this();
     setValue(id);
   }
 
+  /**
+   * Sets the UUID value for this entity ID.
+   * 
+   * @param value the UUID value to set, must not be null
+   * @throws IllegalArgumentException if value is null
+   */
   protected void setValue(UUID value) {
     Arguments.checkIfIsNull(value, "id.cannot_be_null");
     this.value = value;
   }
 
+  /**
+   * {@inheritDoc}
+   */
   public UUID value() {
     return value;
   }
